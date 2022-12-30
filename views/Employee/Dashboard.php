@@ -98,6 +98,34 @@
             </form>
         </div>
 
+
+        <div class="m-5 h-fit p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <p class="dark:text-white mb-2">Employee: </p>
+            <form action="../includes/tableMethods/Usertype.php" method="post">
+
+                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select the user:</label>
+                <select name="User_id" id="countries" class="mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <?php
+                        if ($resultEmployeeTypes->num_rows > 0) {
+                            // output data of each row
+                            while($row = $resultEmployeeTypes->fetch_assoc()) {
+                                echo "<option>" . $row["User_ID"] . " - " . $row["Name"]. "</option>";
+                            }
+                        } else {
+                            echo "0 results";
+                        }
+                    ?>
+                </select>
+
+                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select the type:</label>
+                <select name="Type" id="countries" class="mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option>Employee</option>
+                    <option>Customer</option>
+                </select>
+                <button type="submit" value="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+            </form>
+        </div>
+
         <div class="m-5 h-fit p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
             <p class="dark:text-white mb-2">Locations: </p>
             <form action="../includes/tableMethods/Location.php" method="post">

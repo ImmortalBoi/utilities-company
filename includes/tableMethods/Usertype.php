@@ -28,6 +28,31 @@ function getUsertypes($conn){
     }
 }
 
+function getCustomertypes($conn){
+    $sql = "SELECT * FROM `utilities_company_DB`.`Usertype` 
+    WHERE `utilities_company_DB`.`Usertype` = 'Customer'";
+    try {
+        $result = $conn->query($sql);
+
+        return $result;
+    } catch (Exception $e) {
+        echo "Error getting Customer Usertypes: ". $conn->error;
+    }
+}
+
+function getEmployeetypes($conn){
+    $sql = "SELECT `utlities_company_DB`.`Usertype`.`User_ID`, `utlities_company_DB`.`User`.`Name`, `utlities_company_DB`.`Usertype`.`Type` 
+    FROM `utilities_company_DB`.`Usertype`
+    INNER JOIN `utilities_company_DB`.`User` ON `utilities_company_DB`.`Department`.`User_ID` = `utlities_company_DB`.`User`.`User_ID`
+    WHERE Usertype = 'Employee';";
+    try {
+        $result = $conn->query($sql);
+
+        return $result;
+    } catch (Exception $e) {
+        echo "Error getting Employee Usertypes: ". $conn->error;
+    }
+}
 // function getUserID($conn,$id){
 
 // }

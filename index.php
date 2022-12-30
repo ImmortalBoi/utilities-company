@@ -13,6 +13,8 @@ switch ($request) {
     case '/' :
         $resultUsers = getUsers($conn);
         $resultLocations = getLocations($conn);
+        $resultCostumerTypes = getCustomertypes($conn);
+        $resultEmployeeTypes = getEmployeetypes($conn);
         require __DIR__ . '/views/Employee/Dashboard.php';
         break;
     case '' :

@@ -49,59 +49,162 @@
     <div class="ml-64 w-[calc(100vw-16rem)] min-h-screen max-h-fit bg-zinc-500 flex grid grid-cols-2 gap-3 py-6">
 
         <div class="m-5 h-fit p-6 bg-white dark:text-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <p>Users: </p>
-            <?php 
-                if ($resultUsers->num_rows > 0) {
-                    // output data of each row
-                    while($row = $resultUsers->fetch_assoc()) {
-                        echo $row["User_ID"]. " - Name: " . $row["Name"]. " - Address: " . $row["Address"]. "<br>";
-                    }
-                } else {
-                    echo "0 results";
-                }
-            ?>
+            <p><b>Users</b></p>
+
+            <div class="overflow-x-auto relative">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">
+                                ID
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Name
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Address
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <?php
+                                if ($resultUsers->num_rows > 0) {
+                                    // output data of each row
+                                    while($row = $resultUsers->fetch_assoc()) {
+                                        echo "<th scope=\"row\" class=\"py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white\">".$row["User_ID"]."</th>";
+                                        
+                                        echo "<td class=\"py-4 px-6\">".$row["Name"]."</td>";
+
+                                        echo "<td class=\"py-4 px-6\">".$row["Address"]."</td>";
+                                    }
+                                }
+                            ?>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
         <div class="m-5 h-fit p-6 bg-white dark:text-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <p>Usertype: </p>
-            <?php 
-                if ($resultUsertypes->num_rows > 0) {
-                    // output data of each row
-                    while($row = $resultUsertypes->fetch_assoc()) {
-                        echo $row['User_ID']." - Type: ".$row['Type'];
-                    }
-                } else {
-                    echo "0 results";
-                }
-            ?>
+            <p><b>Usertype</b></p>
+            <div class="overflow-x-auto relative">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">
+                                ID
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Type
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <?php
+                                if ($resultUsertypes->num_rows > 0) {
+                                    // output data of each row
+                                    while($row = $resultUsertypes->fetch_assoc()) {
+                                        echo "<th scope=\"row\" class=\"py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white\">".$row["User_ID"]."</th>";
+                                        
+                                        echo "<td class=\"py-4 px-6\">".$row["Type"]."</td>";
+                                    }
+                                }
+                            ?>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="m-5 h-fit p-6 bg-white dark:text-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <p>Location: </p>
-            <?php 
-                if ($resultLocations->num_rows > 0) {
-                    // output data of each row
-                    while($row = $resultLocations->fetch_assoc()) {
-                        echo $row['Loc_ID']." - Address: ".$row['Address']." - Area: ".$row['Area'];
-                    }
-                } else {
-                    echo "0 results";
-                }
-            ?>
+            <p><b>Location</b></p>
+            <div class="overflow-x-auto relative">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">
+                                ID
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Address
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Area
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <?php
+                                if ($resultLocations->num_rows > 0) {
+                                    // output data of each row
+                                    while($row = $resultLocations->fetch_assoc()) {
+                                        echo "<th scope=\"row\" class=\"py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white\">".$row["Loc_ID"]."</th>";
+                                        
+                                        echo "<td class=\"py-4 px-6\">".$row["Address"]."</td>";
+
+                                        echo "<td class=\"py-4 px-6\">".$row["Area"]."</td>";
+                                    }
+                                }
+                            ?>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="m-5 h-fit p-6 bg-white dark:text-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <p>Department: </p>
-            <?php 
-                if ($resultDepartments->num_rows > 0) {
-                    // output data of each row
-                    while($row = $resultDepartments->fetch_assoc()) {
-                        echo $row['Dep_ID']." - Name: ".$row['Name']." - Type: ".$row['Type']." - Area: ".$row['Area']." - Address: ".$row['Address'];
-                    }
-                } else {
-                    echo "0 results";
-                }
-            ?>
+            <p><b>Department</b></p>
+            <div class="overflow-x-auto relative">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">
+                                ID
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Name
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Type
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Area
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Address
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <?php
+                                if ($resultDepartments->num_rows > 0) {
+                                    // output data of each row
+                                    while($row = $resultDepartments->fetch_assoc()) {
+                                        echo "<th scope=\"row\" class=\"py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white\">".$row["Dep_ID"]."</th>";
+                                        
+                                        echo "<td class=\"py-4 px-6\">".$row["Name"]."</td>";
+
+                                        echo "<td class=\"py-4 px-6\">".$row["Type"]."</td>";
+
+                                        echo "<td class=\"py-4 px-6\">".$row["Area"]."</td>";
+
+                                        echo "<td class=\"py-4 px-6\">".$row["Address"]."</td>";
+
+                                    }
+                                }
+                            ?>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
     <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
