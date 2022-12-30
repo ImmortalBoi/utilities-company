@@ -6,7 +6,7 @@ function postDepartment($loc_id, $name, $type){
     try {
         require("../connect.php");
         $conn = connectToDB();
-        $sql = "INSERT INTO `utilities_company_DB`.`Department` (`Dep_ID`, `SupEmp_ID`, `Loc_ID`, `Name`, `Type`) VALUES (NULL, '".$loc_id."', '".$name."', '".$type."') ";
+        $sql = "INSERT INTO `utilities_company_DB`.`Department` (`Dep_ID`, `Loc_ID`, `Name`, `Type`) VALUES (NULL, '".$loc_id."', '".$name."', '".$type."') ";
 
         $conn->query($sql);
         http_response_code(200);
@@ -18,7 +18,11 @@ function postDepartment($loc_id, $name, $type){
 }
 
 function getDepartments($conn){
-    $sql = "SELECT * FROM `utilities_company_DB`.`Location` ";
+    $sql = "SELECT * FROM `utilities_company_DB`.`Department` ";
+
+    $sql = "SELECT `Department`.`Dep_ID`, `Department`.`Name`, `Department`.`Type`, `Location`.`Address`, `Location`.`Area` 
+    FROM `utilities_company_DB`.`Department`
+    INNER JOIN `utilities_company_DB`.`Location` ON `utilities_company_DB`.`Department`.`Loc_ID` = `Location`.`Loc_ID`;";
     try {
         $result = $conn->query($sql);
 

@@ -59,13 +59,16 @@ function createDB($conn){
     // Create Department Table
     createEntity($conn,'Department',"CREATE TABLE `utilities_company_DB`.`Department` (
         `Dep_ID` INT NOT NULL AUTO_INCREMENT, 
-        `SupEmp_ID` INT NOT NULL , 
         `Loc_ID` INT NOT NULL , 
         `Name` VARCHAR(50) NOT NULL , 
         `Type` VARCHAR(50) NOT NULL , 
         PRIMARY KEY (`Dep_ID`)) ENGINE = InnoDB; ");
 
     // Create Employee FK
+    createEntity($conn,'Employee userID Fk',"ALTER TABLE `utilities_company_DB`.`Employee` 
+    ADD FOREIGN KEY (`User_ID`) 
+    REFERENCES `User`(`User_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT; ");
+
     createEntity($conn,'Employee DepID Fk',"ALTER TABLE `utilities_company_DB`.`Employee` 
         ADD FOREIGN KEY (`Dep_ID`) 
         REFERENCES `Department`(`Dep_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT; ");
@@ -74,10 +77,6 @@ function createDB($conn){
     createEntity($conn,'Department LocID FK',"ALTER TABLE `utilities_company_DB`.`Department` 
         ADD FOREIGN KEY (`Loc_ID`) 
         REFERENCES `Location`(`Loc_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT; ");
-
-    createEntity($conn,'Department SupEmpID FK',"ALTER TABLE `utilities_company_DB`.`Department` 
-        ADD FOREIGN KEY (`SupEmp_ID`) 
-        REFERENCES `Employee`(`User_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT; ");
 
     // Create Customer Table
     createEntity($conn,'Customer',"CREATE TABLE `utilities_company_DB`.`Customer` ( 

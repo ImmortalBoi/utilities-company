@@ -7,10 +7,9 @@ function postLocation($area, $address){
         require("../connect.php");
         $conn = connectToDB();
         $sql = "INSERT INTO `utilities_company_DB`.`Location` (`Loc_ID`, `Area`, `Address`) VALUES ( NULL, '".$area."', '".$address."')";
-        echo $sql;
         $conn->query($sql);
         http_response_code(200);
-        // echo '<script>window.location.href = "/";</script>';
+        echo '<script>window.location.href = "/";</script>';
     } catch (Exception $e) {
         echo "Error inserting into Location: ". $conn->error;
         http_response_code(400);

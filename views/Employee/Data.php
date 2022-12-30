@@ -46,7 +46,7 @@
         </div>
     </aside>
 
-    <div class="ml-64 w-[calc(100vw-16rem)] min-h-screen max-h-fit bg-stone-600 flex grid grid-cols-2 gap-3 py-6">
+    <div class="ml-64 w-[calc(100vw-16rem)] min-h-screen max-h-fit bg-zinc-500 flex grid grid-cols-2 gap-3 py-6">
 
         <div class="m-5 h-fit p-6 bg-white dark:text-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
             <p>Users: </p>
@@ -93,10 +93,10 @@
         <div class="m-5 h-fit p-6 bg-white dark:text-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
             <p>Department: </p>
             <?php 
-                if ($resultLocations->num_rows > 0) {
+                if ($resultDepartments->num_rows > 0) {
                     // output data of each row
-                    while($row = $resultLocations->fetch_assoc()) {
-                        echo $row['Dep_ID']." - Address: ".$row['Address']." - Area: ".$row['Area'];
+                    while($row = $resultDepartments->fetch_assoc()) {
+                        echo $row['Dep_ID']." - Name: ".$row['Name']." - Type: ".$row['Type']." - Area: ".$row['Area']." - Address: ".$row['Address'];
                     }
                 } else {
                     echo "0 results";

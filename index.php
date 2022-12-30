@@ -25,6 +25,7 @@ switch ($request) {
         $resultUsers = getUsers($conn);
         $resultUsertypes = getUsertypes($conn);
         $resultLocations = getLocations($conn);
+        $resultDepartments = getDepartments($conn);
         require __DIR__ . '/views/Employee/Data.php';
         break;
 
