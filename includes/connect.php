@@ -1,8 +1,8 @@
 <?php
 function connectToDB(){
-    $servername = "localhost";
-    $username = "root";
-    $password = "Warrior0";
+    $servername = "";
+    $username = "";
+    $password = "";
     
     // Create connection
     $conn = new mysqli($servername, $username, $password);
