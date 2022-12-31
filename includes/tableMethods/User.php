@@ -4,7 +4,6 @@ $request = explode("/", substr(@$_SERVER['PATH_INFO'], 1));
 
 function postUser($name, $email, $address, $password){
     try {
-        require("../connect.php");
         $conn = connectToDB();
         $sql = "INSERT INTO `utilities_company_DB`.`User` (`User_ID`, `Name`, `Email`, `Address`, `Password`) VALUES ( NULL, '".$name."', '".$email."', '".$address."', MD5('".$password."')) ";
     
