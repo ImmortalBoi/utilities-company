@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <a href="/logout" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                         <i class="py-1 pr-1 w-6 h-6 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white fa-solid fa-arrow-left-long">|</i>
                         <span class="flex-1 ml-3 whitespace-nowrap">Sign Out</span>
                     </a>
@@ -109,92 +109,6 @@
                                         
                                         echo "<td class=\"py-4 px-6\">".$row["Type"]."</td>";
                                         echo "</tr>";
-                                    }
-                                }
-                            ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="m-5 h-fit p-6 bg-white dark:text-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <p><b>Location</b></p>
-            <div class="overflow-x-auto relative">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="py-3 px-6">
-                                ID
-                            </th>
-                            <th scope="col" class="py-3 px-6">
-                                Address
-                            </th>
-                            <th scope="col" class="py-3 px-6">
-                                Area
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                            <?php
-                                if ($resultLocations->num_rows > 0) {
-                                    // output data of each row
-                                    while($row = $resultLocations->fetch_assoc()) {
-                                        echo "<tr class=\"bg-white border-b dark:bg-gray-800 dark:border-gray-700\">";
-
-                                        echo "<th scope=\"row\" class=\"py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white\">".$row["Loc_ID"]."</th>";
-                                        
-                                        echo "<td class=\"py-4 px-6\">".$row["Address"]."</td>";
-
-                                        echo "<td class=\"py-4 px-6\">".$row["Area"]."</td>";
-                                        echo "</tr>";
-                                    }
-                                }
-                            ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="m-5 h-fit p-6 bg-white dark:text-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <p><b>Department</b></p>
-            <div class="overflow-x-auto relative">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="py-3 px-6">
-                                ID
-                            </th>
-                            <th scope="col" class="py-3 px-6">
-                                Name
-                            </th>
-                            <th scope="col" class="py-3 px-6">
-                                Type
-                            </th>
-                            <th scope="col" class="py-3 px-6">
-                                Area
-                            </th>
-                            <th scope="col" class="py-3 px-6">
-                                Address
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                            <?php
-                                if ($resultDepartments->num_rows > 0) {
-                                    // output data of each row
-                                    while($row = $resultDepartments->fetch_assoc()) {
-                                        echo "<tr class=\"bg-white border-b dark:bg-gray-800 dark:border-gray-700\">";
-                                        echo "<th scope=\"row\" class=\"py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white\">".$row["Dep_ID"]."</th>";
-                                        
-                                        echo "<td class=\"py-4 px-6\">".$row["Name"]."</td>";
-
-                                        echo "<td class=\"py-4 px-6\">".$row["Type"]."</td>";
-
-                                        echo "<td class=\"py-4 px-6\">".$row["Area"]."</td>";
-
-                                        echo "<td class=\"py-4 px-6\">".$row["Address"]."</td>";
-                                        echo "</tr>";
-
                                     }
                                 }
                             ?>
@@ -303,6 +217,94 @@
                 </table>
             </div>
         </div>
+
+        <div class="m-5 h-fit p-6 bg-white dark:text-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <p><b>Location</b></p>
+            <div class="overflow-x-auto relative">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">
+                                ID
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Address
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Area
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <?php
+                                if ($resultLocations->num_rows > 0) {
+                                    // output data of each row
+                                    while($row = $resultLocations->fetch_assoc()) {
+                                        echo "<tr class=\"bg-white border-b dark:bg-gray-800 dark:border-gray-700\">";
+
+                                        echo "<th scope=\"row\" class=\"py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white\">".$row["Loc_ID"]."</th>";
+                                        
+                                        echo "<td class=\"py-4 px-6\">".$row["Address"]."</td>";
+
+                                        echo "<td class=\"py-4 px-6\">".$row["Area"]."</td>";
+                                        echo "</tr>";
+                                    }
+                                }
+                            ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="m-5 h-fit p-6 bg-white dark:text-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <p><b>Department</b></p>
+            <div class="overflow-x-auto relative">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">
+                                ID
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Name
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Type
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Area
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Address
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <?php
+                                if ($resultDepartments->num_rows > 0) {
+                                    // output data of each row
+                                    while($row = $resultDepartments->fetch_assoc()) {
+                                        echo "<tr class=\"bg-white border-b dark:bg-gray-800 dark:border-gray-700\">";
+                                        echo "<th scope=\"row\" class=\"py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white\">".$row["Dep_ID"]."</th>";
+                                        
+                                        echo "<td class=\"py-4 px-6\">".$row["Name"]."</td>";
+
+                                        echo "<td class=\"py-4 px-6\">".$row["Type"]."</td>";
+
+                                        echo "<td class=\"py-4 px-6\">".$row["Area"]."</td>";
+
+                                        echo "<td class=\"py-4 px-6\">".$row["Address"]."</td>";
+                                        echo "</tr>";
+
+                                    }
+                                }
+                            ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+
     </div>
     <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
 </body>

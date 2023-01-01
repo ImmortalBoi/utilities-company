@@ -6,19 +6,68 @@ $request = $_SERVER['REQUEST_URI'];
 $conn = connectToDB();
 
 switch ($request) {
-    case '/' :
-        require __DIR__ . '/views/login.php';
+        case '/' :
+        if (!isset($_SESSION['user'])) {
+            require __DIR__ . '/views/login.php';
+        }
+
+        if ($_SESSION['type'] === "Employee") {
+            require __DIR__.'/includes/tableMethods/User.php';
+            require __DIR__.'/includes/tableMethods/Usertype.php';
+            require __DIR__.'/includes/tableMethods/Location.php';
+            require __DIR__.'/includes/tableMethods/Department.php';
+            require __DIR__.'/includes/tableMethods/Employee.php';
+            require __DIR__.'/includes/tableMethods/Customer.php';
+            
+            $resultUsers = getUsers($conn);
+            $resultLocations = getLocations($conn);
+            $resultDepartments = getDepartments($conn);
+            $resultCustomerTypes = getCustomertypes($conn);
+            $resultEmployeeTypes = getEmployeetypes($conn);
+            require __DIR__ . '/views/Employee/Dashboard.php';
+        }
+        else if(($_SESSION['type'] === "Customer")){
+            require __DIR__ . '/views/Customer/Dashboard.php';
+        }
+
         break;
     case '' :
-        require __DIR__ . '/views/login.php';
+        if (!isset($_SESSION['user'])) {
+            echo "User ID Not set";
+            echo $_SESSION['user'];
+            require __DIR__ . '/views/login.php';
+        }
+
+        if ($_SESSION['type'] === "Employee") {
+            require __DIR__.'/includes/tableMethods/User.php';
+            require __DIR__.'/includes/tableMethods/Usertype.php';
+            require __DIR__.'/includes/tableMethods/Location.php';
+            require __DIR__.'/includes/tableMethods/Department.php';
+            require __DIR__.'/includes/tableMethods/Employee.php';
+            require __DIR__.'/includes/tableMethods/Customer.php';
+            
+            $resultUsers = getUsers($conn);
+            $resultLocations = getLocations($conn);
+            $resultDepartments = getDepartments($conn);
+            $resultCustomerTypes = getCustomertypes($conn);
+            $resultEmployeeTypes = getEmployeetypes($conn);
+            require __DIR__ . '/views/Employee/Dashboard.php';
+        }
+        else if(($_SESSION['type'] === "Customer")){
+            require __DIR__ . '/views/Customer/Dashboard.php';
+        }
+
         break;
     
     case '/validate':
         require __DIR__ . '/includes/validate.php';
         break;
     
+    case '/logout':
+        require __DIR__. '/includes/logout.php';
+        break;
+    
     case '/dashboard':
-
 
         if (!isset($_SESSION['user'])) {
             echo "User ID Not set";
@@ -41,11 +90,12 @@ switch ($request) {
             $resultEmployeeTypes = getEmployeetypes($conn);
             require __DIR__ . '/views/Employee/Dashboard.php';
         }
-        else {
+        else if(($_SESSION['type'] === "Customer")){
             require __DIR__ . '/views/Customer/Dashboard.php';
         }
 
         break;
+
     case '/user':
         require __DIR__.'/includes/tableMethods/User.php';
         require __DIR__.'/includes/tableMethods/Usertype.php';
@@ -64,15 +114,18 @@ switch ($request) {
             $resultDepartments = getDepartments($conn);
             $resultCustomers = getCustomers($conn);
             $resultEmployees = getEmployees($conn);
-            require __DIR__ . '/views/Employee/Dashboard.php';
+            require __DIR__ . '/views/Employee/Data.php';
         }
-        else {
-            require __DIR__ . '/views/Customer/Dashboard.php';
+        else if(($_SESSION['type'] === "Customer")){
+            $resultCustomer = getCustomer($conn,$_SESSION['user']);
+            require __DIR__ . '/views/Customer/Profile.php';
         }
         break;
 
     case '/dbReset':
-        require __DIR__ . '/views/dbReset.php';
+        require __DIR__.'/includes/tableMethods/User.php';
+        require __DIR__.'/includes/tableMethods/Usertype.php';
+        require __DIR__ .'/views/dbReset.php';
         break;
 
     case '/about' :

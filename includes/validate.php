@@ -25,8 +25,9 @@
         $User_type = getUsertype($conn,$row['User_ID']);
         $_SESSION['user'] = $User_ID;
         $_SESSION['type'] = $User_type;
-        echo $_SESSION['user'];
-        echo $_SESSION['type'];
+        echo $User_type;
+        // echo $_SESSION['user'];
+        // echo $_SESSION['type'];
         
         header('Location:/dashboard  ');
         // echo '<script>window.location.href = "/dashboard";</script>';

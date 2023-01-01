@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <a href="/logout" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                         <i class="py-1 pr-1 w-6 h-6 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white fa-solid fa-arrow-left-long">|</i>
                         <span class="flex-1 ml-3 whitespace-nowrap">Sign Out</span>
                     </a>
@@ -46,8 +46,111 @@
         </div>
     </aside>
 
-    <div class="ml-64 w-[calc(100vw-16rem)] min-h-screen max-h-fit bg-zinc-500 flex grid grid-cols-2 gap-3 py-6">
+    <div class="ml-64 w-[calc(100vw-16rem)] min-h-screen max-h-fit bg-zinc-500 flex justify-center flex-col py-6">
+        <div class="m-5 h-fit p-6 bg-white dark:text-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <p><b>Customer</b></p>
+            <div class="overflow-x-auto relative">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">
+                                ID
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Name
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Service Voltage
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Rate
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Service Character
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Benefit
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <?php
+                                    $row = $resultCustomer->fetch_assoc();
+                                    echo "<tr class=\"bg-white border-b dark:bg-gray-800 dark:border-gray-700\">";
+                                    echo "<th scope=\"row\" class=\"py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white\">".$row["User_ID"]."</th>";
+                                    
+                                    echo "<td class=\"py-4 px-6\">".$row["Name"]."</td>";
+
+                                    echo "<td class=\"py-4 px-6\">".$row["Service_voltage"]."</td>";
+
+                                    echo "<td class=\"py-4 px-6\">".$row["Rate"]."</td>";
+
+                                    echo "<td class=\"py-4 px-6\">".$row["Service_character"]."</td>";
+
+                                    echo "<td class=\"py-4 px-6\">".$row["Benefits"]."</td>";
+                                    echo "</tr>";
+
+                            ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="m-5 h-fit p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <p class="dark:text-white mb-2">Customer: </p>
+            <form action="../includes/tableMethods/Customer.php" method="post">
+
+                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select the user:</label>
+                <select name="user_id" id="countries" class="mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <?php
+                        echo "<option>" . $_SESSION['user']. "</option>";
+                    ?>
+                </select>
+                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select the user:</label>
+                <select name="method" id="countries" class="mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="update">Update</option>
+                </select>
+
+                <div class="relative z-0 mb-6 w-full group">
+                    <input type="text" name="service_voltage" id="Service Voltage" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="Service Voltage" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Service Voltage</label>
+                </div>
+
+                <div class="relative z-0 mb-6 w-full group">
+                    <input type="text" name="rate" id="Rate" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="Rate" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Rate</label>
+                </div>
+
+                <div class="relative z-0 mb-6 w-full group">
+                    <input type="text" name="service_character" id="service_character" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="service_character" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Service Character</label>
+                </div>
+
+                <div class="relative z-0 mb-6 w-full group">
+                    <input type="text" name="benefits" id="benefits" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="benefits" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Benefit</label>
+                </div>
+                <button type="submit" value="update" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+            </form>
+        </div>
+        <div class="m-5 h-fit p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <p class="dark:text-white mb-2">Customer: </p>
+            <form action="../includes/tableMethods/User.php" method="post">
+                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select the user:</label>
+                <select name="method" id="countries" class="mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="delete">delete</option>
+                </select>
+                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select the user:</label>
+                <select name="user_id" id="countries" class="mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <?php
+                        echo "<option>" . $_SESSION['user']. "</option>";
+                    ?>
+                </select>
+                <button type="submit" value="update" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800">Delete</button>
+            </form>
+        </div>
     </div>
+    
     <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
 </body>
 </html>

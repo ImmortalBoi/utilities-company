@@ -4,8 +4,10 @@ $request = explode("/", substr(@$_SERVER['PATH_INFO'], 1));
 
 function postUsertype($user_id, $type){
     try {
-        require("../connect.php");
-        $conn = connectToDB();
+        if (!isset($conn)) {
+            require "../connect.php";
+            $conn = connectToDB();
+        }
         $sql = "INSERT INTO `utilities_company_DB`.`Usertype` (`User_ID`, `Type`) VALUES ('".$user_id."', '".$type."')";
 
         $conn->query($sql);
@@ -16,7 +18,22 @@ function postUsertype($user_id, $type){
         http_response_code(400);
     }
 }
+function postUsertypeDB($user_id, $type){
+    try {
+        if (!isset($conn)) {
+            // require "../connect.php";
+            $conn = connectToDB();
+        }
+        $sql = "INSERT INTO `utilities_company_DB`.`Usertype` (`User_ID`, `Type`) VALUES ('".$user_id."', '".$type."')";
 
+        $conn->query($sql);
+        http_response_code(200);
+        // echo '<script>window.location.href = "/";</script>';
+    } catch (Exception $e) {
+        echo "Error inserting into Usertype: ". $conn->error;
+        http_response_code(400);
+    }
+}
 function getUsertypes($conn){
     $sql = "SELECT * FROM `utilities_company_DB`.`Usertype` ";
     try {

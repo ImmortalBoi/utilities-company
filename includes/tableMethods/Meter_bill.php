@@ -2,11 +2,11 @@
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode("/", substr(@$_SERVER['PATH_INFO'], 1));
 
-function postDepartment($loc_id, $name, $type){
+function postMeterBill($meter_id, $bill_id, $cost){
     try {
         require("../connect.php");
         $conn = connectToDB();
-        $sql = "INSERT INTO `utilities_company_DB`.`Department` (`Dep_ID`, `Loc_ID`, `Name`, `Type`) VALUES (NULL, '".$loc_id."', '".$name."', '".$type."') ";
+        $sql = "INSERT INTO `utilities_company_DB`.`Meter_BIll` (`Meter_ID`, `Bill_ID`, `Cost`) VALUES (NULL, '".$meter_id."', '".$bill_id."', '".$cost."') ";
 
         $conn->query($sql);
         http_response_code(200);
@@ -17,8 +17,13 @@ function postDepartment($loc_id, $name, $type){
     }
 }
 
-function getDepartments($conn){
-    $sql = "SELECT * FROM `utilities_company_DB`.`Dep_view`;";
+function getMeterBill($conn){
+    $sql = "SELECT `
+    FROM `utilities_company_DB`.`Meter`
+    WHERE `utilities_company_DB`.`Meter_ID` IN (SELECT `Bill_ID`
+                FROM `utilities_company_DB`.`Utility_bill`
+                WHERE `paid_status`= false)";
+
     try {
         $result = $conn->query($sql);
 

@@ -54,7 +54,9 @@ function createDB($conn){
         `Dep_ID` INT NOT NULL , 
         `Title` VARCHAR(50) NOT NULL , 
         `Salary` VARCHAR(50) NOT NULL , 
-        `SSN` BIGINT NOT NULL ) ENGINE = InnoDB; ");
+        `SSN` BIGINT NOT NULL ,
+        UNIQUE (`User_ID`)) ENGINE = InnoDB;");
+        
 
     // Create Department Table
     createEntity($conn,'Department',"CREATE TABLE `utilities_company_DB`.`Department` (
@@ -67,16 +69,16 @@ function createDB($conn){
     // Create Employee FK
     createEntity($conn,'Employee userID Fk',"ALTER TABLE `utilities_company_DB`.`Employee` 
     ADD FOREIGN KEY (`User_ID`) 
-    REFERENCES `User`(`User_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT; ");
+    REFERENCES `User`(`User_ID`) ON DELETE CASCADE ON UPDATE RESTRICT; ");
 
     createEntity($conn,'Employee DepID Fk',"ALTER TABLE `utilities_company_DB`.`Employee` 
         ADD FOREIGN KEY (`Dep_ID`) 
-        REFERENCES `Department`(`Dep_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT; ");
+        REFERENCES `Department`(`Dep_ID`) ON DELETE CASCADE ON UPDATE RESTRICT; ");
 
     // Create Department Fk
     createEntity($conn,'Department LocID FK',"ALTER TABLE `utilities_company_DB`.`Department` 
         ADD FOREIGN KEY (`Loc_ID`) 
-        REFERENCES `Location`(`Loc_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT; ");
+        REFERENCES `Location`(`Loc_ID`) ON DELETE CASCADE ON UPDATE RESTRICT; ");
 
     // Create Customer Table
     createEntity($conn,'Customer',"CREATE TABLE `utilities_company_DB`.`Customer` ( 
@@ -84,12 +86,13 @@ function createDB($conn){
         `Service_voltage` INT NOT NULL , 
         `Rate` INT NOT NULL , 
         `Service_character` VARCHAR(50) NOT NULL , 
-        `Benefits` VARCHAR(50) NULL ) ENGINE = InnoDB; ");
+        `Benefits` VARCHAR(50) NULL,
+        UNIQUE (`User_ID`)) ENGINE = InnoDB; ");
 
     // Create Customer FK
     createEntity($conn,'Customer UserID FK',"ALTER TABLE `utilities_company_DB`.`Customer` 
         ADD FOREIGN KEY (`User_ID`) 
-        REFERENCES `User`(`User_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT; ");
+        REFERENCES `User`(`User_ID`) ON DELETE CASCADE ON UPDATE RESTRICT; ");
 
     // Create Generator Table
     createEntity($conn,"Generator","CREATE TABLE `utilities_company_DB`.`Generator` ( 
@@ -102,7 +105,7 @@ function createDB($conn){
     // Create Generator FK
     createEntity($conn,"Generator LocID FK","ALTER TABLE `utilities_company_DB`.`Generator` 
         ADD FOREIGN KEY (`Loc_ID`) 
-        REFERENCES `Location`(`Loc_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;");
+        REFERENCES `Location`(`Loc_ID`) ON DELETE CASCADE ON UPDATE RESTRICT;");
 
     // Create Utility_Bill Table
     createEntity($conn,"Utility Bill","CREATE TABLE `utilities_company_DB`.`Utility_Bill` ( 
@@ -116,7 +119,7 @@ function createDB($conn){
     // Create Utility_Bill FK
     createEntity($conn,"Utility Bill GenID FK","ALTER TABLE `utilities_company_DB`.`Utility_Bill` 
         ADD FOREIGN KEY (`Gen_ID`) 
-        REFERENCES `Generator`(`Gen_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT; ");
+        REFERENCES `Generator`(`Gen_ID`) ON DELETE CASCADE ON UPDATE RESTRICT; ");
 
     // Create Meter Table
     createEntity($conn,"Meter","CREATE TABLE `utilities_company_DB`.`Meter` ( 
@@ -129,7 +132,7 @@ function createDB($conn){
     // Create Meter FK
     createEntity($conn,"Meter UserID FK","ALTER TABLE `utilities_company_DB`.`Meter` 
         ADD FOREIGN KEY (`User_ID`) 
-        REFERENCES `Customer`(`User_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT; ");
+        REFERENCES `Customer`(`User_ID`) ON DELETE CASCADE ON UPDATE RESTRICT; ");
 
     // Create Meter_Bill Table
     createEntity($conn,"Meter Bill","CREATE TABLE `utilities_company_DB`.`Meter_bill` ( 
@@ -140,11 +143,11 @@ function createDB($conn){
     // Create Meter_Bill FK
     createEntity($conn,"Meter Bill BillID FK","ALTER TABLE `utilities_company_DB`.`Meter_bill` 
         ADD FOREIGN KEY (`Bill_ID`) 
-        REFERENCES `Utility_Bill`(`Bill_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT; ");
+        REFERENCES `Utility_Bill`(`Bill_ID`) ON DELETE CASCADE ON UPDATE RESTRICT; ");
 
     createEntity($conn,"Meter Bill MeterID FK","ALTER TABLE `utilities_company_DB`.`Meter_bill` 
         ADD FOREIGN KEY (`Meter_ID`) 
-        REFERENCES `Meter`(`Meter_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT; ");
+        REFERENCES `Meter`(`Meter_ID`) ON DELETE CASCADE ON UPDATE RESTRICT; ");
 
     // Create Insurance Table
     createEntity($conn,"Insurance","CREATE TABLE `utilities_company_DB`.`Insurance` ( 
@@ -157,7 +160,13 @@ function createDB($conn){
     // Create Insurance FK
     createEntity($conn,"Insurance UserID","ALTER TABLE `utilities_company_DB`.`Insurance` 
         ADD FOREIGN KEY (`User_ID`) 
-        REFERENCES `Employee`(`User_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT; ");
+        REFERENCES `Employee`(`User_ID`) ON DELETE CASCADE ON UPDATE RESTRICT; ");
+
+    // Create Insurance FK
+    createEntity($conn,"Department View","CREATE VIEW `utilities_company_DB`.Dep_view AS 
+    SELECT `Department`.`Dep_ID`, `Department`.`Name`, `Department`.`Type`, `Location`.`Address`, `Location`.`Area` 
+    FROM `utilities_company_DB`.`Department`
+    INNER JOIN `utilities_company_DB`.`Location` ON `utilities_company_DB`.`Department`.`Loc_ID` = `Location`.`Loc_ID`;");
 
 }
 ?>
